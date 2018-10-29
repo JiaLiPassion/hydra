@@ -22,6 +22,7 @@ package consent
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"net/url"
 	"time"
@@ -617,6 +618,8 @@ func (h *Handler) LogoutUser(w http.ResponseWriter, r *http.Request, ps httprout
 		h.H.WriteError(w, r, err)
 		return
 	}
+
+	fmt.Printf("logout user sid: %s", sid)
 
 	if sid != "" {
 		if err := h.M.DeleteAuthenticationSession(r.Context(), sid); err != nil {

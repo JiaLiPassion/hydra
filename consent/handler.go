@@ -619,9 +619,10 @@ func (h *Handler) LogoutUser(w http.ResponseWriter, r *http.Request, ps httprout
 		return
 	}
 
-	fmt.Printf("logout user sid: %s", sid)
+	fmt.Printf("logout user sid: %s, not found sid? %t", sid, sid == "")
 
 	if sid != "" {
+		fmt.Printf("logout delete sid: %s", sid)
 		if err := h.M.DeleteAuthenticationSession(r.Context(), sid); err != nil {
 			h.H.WriteError(w, r, err)
 			return
